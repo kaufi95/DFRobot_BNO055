@@ -410,7 +410,7 @@ void DFRobot_BNO055::setAccHighGDuration(uint16_t dur)
   }
   uint8_t   temp = dur / 2;
   setToPage(1);
-  writeReg(regOffset1(sRegsPage1.ACC_HG_THRES), (uint8_t*) temp, sizeof(temp));
+  writeReg(regOffset1(sRegsPage1.ACC_HG_THRES), (uint8_t*) &temp, sizeof(temp));
 }
 
 void DFRobot_BNO055::setAccHighGThres(uint16_t thres)
