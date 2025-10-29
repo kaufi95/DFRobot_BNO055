@@ -514,6 +514,32 @@ void DFRobot_BNO055::setGyrAmThres(uint8_t thres)
   writeReg(regOffset1(sRegsPage1.GYR_AM_THRES), (uint8_t*) &thres, sizeof(thres));
 }
 
+void DFRobot_BNO055::setGyrIntAmDur(uint8_t dur)
+{
+  if ((dur > 4) || (dur < 1))
+  {
+    lastOperateStatus = eStatusErrParameter;
+    return;
+  }
+  sRegGyrAmSet_t sRegFleid = {0}, sRegVal = {0};
+  sRegFleid.AWAKE_DURATION = 0xff;
+  sRegVal.AWAKE_DURATION = dur - 1;
+  writeRegBitsHelper(1, sRegsPage1.GYR_AM_SET, sRegFleid, sRegVal);
+}
+
+void DFRobot_BNO055::setGyrIntAmSlope(uint8_t slope)
+{
+  if (slope > 3)
+  {
+    lastOperateStatus = eStatusErrParameter;
+    return;
+  }
+  sRegGyrAmSet_t sRegFleid = {0}, sRegVal = {0};
+  sRegFleid.SLOPE_SAMPLES = 0xff;
+  sRegVal.SLOPE_SAMPLES = slope;
+  writeRegBitsHelper(1, sRegsPage1.GYR_AM_SET, sRegFleid, sRegVal);
+}
+
 // protected functions ----------------------------------------------------------------
 
 uint8_t DFRobot_BNO055::getReg(uint8_t reg, uint8_t pageId)
