@@ -473,18 +473,18 @@ void DFRobot_BNO055::setGyrIntEnable(eGyrIntSet_t eInt)
 {
   uint8_t   temp;
   setToPage(1);
-  readReg(regOffset1(sRegsPage1.GYR_INT_SETTING), (uint8_t*) temp, sizeof(temp));
+  readReg(regOffset1(sRegsPage1.GYR_INT_SETTING), (uint8_t*) &temp, sizeof(temp));
   temp |= eInt;
-  writeReg(regOffset1(sRegsPage1.GYR_INT_SETTING), (uint8_t*) temp, sizeof(temp));
+  writeReg(regOffset1(sRegsPage1.GYR_INT_SETTING), (uint8_t*) &temp, sizeof(temp));
 }
 
 void DFRobot_BNO055::setGyrIntDisable(eGyrIntSet_t eInt)
 {
   uint8_t   temp;
   setToPage(1);
-  readReg(regOffset1(sRegsPage1.GYR_INT_SETTING), (uint8_t*) temp, sizeof(temp));
+  readReg(regOffset1(sRegsPage1.GYR_INT_SETTING), (uint8_t*) &temp, sizeof(temp));
   temp &= ~ eInt;
-  writeReg(regOffset1(sRegsPage1.GYR_INT_SETTING), (uint8_t*) temp, sizeof(temp));
+  writeReg(regOffset1(sRegsPage1.GYR_INT_SETTING), (uint8_t*) &temp, sizeof(temp));
 }
 
 void DFRobot_BNO055::setGyrHrSet(eSingleAxis_t eSingleAxis, uint16_t thres, uint16_t dur)
